@@ -1,13 +1,21 @@
+import config from './config'
+import apirouter from './api'
+import express from 'express'
 
-import http from "http";
+const server = express();
 
-const server = http.createServer();
-server.listen(8080);
+// server.get('/', (req, res) => {
+//     res.send('Hello Express');
+// });
+server.use('/api', apirouter);
+server.use(express.static('public'));
 
-server.on("request", (req, res) => {
-  res.write("Hello HTTP!\n");
-  setTimeout(() => {
-    res.write("I Can Stream!\n");
-    res.end();
-  }, 3000);
-});
+// server.get('/about.html', (req, res) => {
+//     fs.readFile('./about.html', (err,data) => {
+//         res.send(data.toString());
+//     });
+// });
+
+server.listen(config.port, ()=>{
+    console.log('Express listening on port', config.port);
+})
