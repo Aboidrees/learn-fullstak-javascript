@@ -1,15 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const App = (props) => {
+const Header = ({message}) => {
     return (
-        <h2 className="text-center">
-            {props.headerMessage}
-        </h2>
+        <h2 className="header text-center">{message}</h2>
+    );
+};
+
+
+const App = () => {
+    return (
+        <div className="App">
+            <Header message="Naming Contest" />
+            <div>
+                ....
+            </div>
+        </div>
     );
 };
 
 ReactDOM.render(
-    <App headerMessage="1" />,
+    <App />,
     document.getElementById("root")
 );
