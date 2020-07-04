@@ -6,9 +6,16 @@ module.exports = {
         path: path.resolve('public'),
         filename: 'bundle.js'
     },
-
+    
     module: {
         rules: [
+            {
+                test: /\.json$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'json-loader'
+                }
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
