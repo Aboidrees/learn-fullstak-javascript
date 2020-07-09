@@ -13,15 +13,23 @@ server.use(sassMiddleWare({
 
 server.set('view engine', 'ejs');
 
+import serverRender from './serverRender';
+
 server.get('/', (req, res) => {
-    res.render('index', {
-        content: 'Hello express and <em>ejs</em>'
-    });
+    serverRender()
+        .then(( {initialMarkup, initialData} ) => {
+            res.render('index', {
+                initialMarkup,
+                initialData
+            });
+        })
+        .catch(console.error);
+
 });
 
 server.use('/api', apirouter);
 server.use(express.static('public'));
 
-server.listen(config.port, ()=>{
+server.listen(config.port, config.host, () => {
     console.log('Express listening on port', config.port);
 })
